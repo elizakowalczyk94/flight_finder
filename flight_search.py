@@ -7,8 +7,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-KIWI_ENDPOINT = os.getenv("TOKEN")
-KIWI_KEY = os.getenv("TOKEN")
+KIWI_ENDPOINT = os.getenv("KIWI_ENDPOINT")
+KIWI_KEY = os.getenv("KIWI_KEY")
 
 
 class FlightSearch:
