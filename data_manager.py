@@ -21,3 +21,7 @@ class DataManager:
     def write_sheety(self, json_data):
         response = requests.post(url=SHEETY_ENDPOINT, json=json_data, headers=self.bearer_headers)
         return response
+
+    def modify_sheety(self, obj_id, json_data):
+        response = requests.put(url=f"{SHEETY_ENDPOINT}/{obj_id}", json=json_data, headers=self.bearer_headers)
+        return response
