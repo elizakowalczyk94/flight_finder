@@ -23,7 +23,6 @@ class DataManager:
             self.iata_to_csv.append(self.write_iata(city_name=city))
         self.create_csv()
         self.city_file = pandas.read_csv(CSV_FILE, delimiter=",")
-        print(self.city_file)
 
     def write_iata(self, city_name):
         kiwi_json = requests.get(url=self.kiwi_iata_endpoint,
@@ -38,32 +37,3 @@ class DataManager:
                        "iata": self.iata_to_csv}
         cities_data_frame = pandas.DataFrame(cities_dict)
         cities_data_frame.to_csv(CSV_FILE, index=False)
-
-# import os
-# import requests
-# from dotenv import load_dotenv
-#
-# load_dotenv("venv/.env")
-# SHEETY_ENDPOINT = os.getenv("SHEETY_ENDPOINT")
-# TOKEN = os.getenv("TOKEN")
-#
-#
-# class DataManager:
-#    # This class is responsible for talking to the Google Sheet.
-#
-#    def __init__(self):
-#        self.bearer_headers = {"Authorization": TOKEN}
-#
-#    def read_sheety(self):
-#        response = requests.get(url=SHEETY_ENDPOINT, headers=self.bearer_headers)
-#        response_json = response.json()
-#        return response_json
-#
-#    def write_sheety(self, json_data):
-#        response = requests.post(url=SHEETY_ENDPOINT, json=json_data, headers=self.bearer_headers)
-#        return response
-#
-#    def modify_sheety(self, obj_id, json_data):
-#        response = requests.put(url=f"{SHEETY_ENDPOINT}/{obj_id}", json=json_data, headers=self.bearer_headers)
-#        return response
-#
