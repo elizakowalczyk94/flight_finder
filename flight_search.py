@@ -49,7 +49,8 @@ class FlightSearch:
             departure_airport=flight_kiwi["flyFrom"],
             arrival_city=flight_kiwi["cityTo"],
             arrival_airport=flight_kiwi["flyTo"],
-            departure_date=flight_kiwi["local_departure"].split("T")[0],
+            departure_date=flight_kiwi["route"][0]["local_departure"].split("T")[0],
+            return_date=flight_kiwi["route"][1]["local_arrival"].split("T")[0],
             airline=flight_kiwi["airlines"][0],
             kiwi_link=flight_kiwi["deep_link"])
 
