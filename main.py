@@ -1,5 +1,3 @@
-# Day 39 capstone project - Flight Deal Finder.
-
 import data_manager
 import flight_search
 import notification_manager
