@@ -20,11 +20,11 @@ class DataManager:
         self.prices_to_csv = prices_list
         self.iata_to_csv = []
         for city in self.cities_to_csv:
-            self.iata_to_csv.append(self.write_iata(city_name=city))
+            self.iata_to_csv.append(self.get_iata(city_name=city))
         self.create_csv()
         self.city_file = pandas.read_csv(CSV_FILE, delimiter=",")
 
-    def write_iata(self, city_name):
+    def get_iata(self, city_name):
         kiwi_json = requests.get(url=self.kiwi_iata_endpoint,
                                  params={"term": city_name},
                                  headers=self.kiwi_key).json()
