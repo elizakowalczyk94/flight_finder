@@ -1,5 +1,4 @@
 class FlightData:
-    # This class is responsible for structuring the flight data.
 
     def __init__(self, price, departure_city, departure_airport, arrival_city,
                  arrival_airport, departure_date, airline, kiwi_link, return_date):

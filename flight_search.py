@@ -1,6 +1,5 @@
 import requests
 import datetime
-import data_manager
 import flight_data
 import os
 from dotenv import load_dotenv
@@ -12,7 +11,6 @@ KIWI_KEY = os.getenv("KIWI_KEY")
 
 
 class FlightSearch:
-    # This class is responsible for talking to the Flight Search API.
 
     def __init__(self, departure_iata, arrival_iata):
         self.kiwi_iata_endpoint = KIWI_ENDPOINT + "/locations/query"
