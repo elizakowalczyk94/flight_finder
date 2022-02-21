@@ -35,21 +35,21 @@ class FlightSearch:
             "curr": "PLN"}
 
         flight_kiwi = requests.get(url=self.kiwi_flight_data, params=search_flight_params, headers=self.kiwi_key)
+
         try:
             flight_kiwi = flight_kiwi.json()["data"][0]
         except IndexError:
-            print(f"No flight found for {self.arrival_iata}.")
-            return False
-
-        flight_data_kiwi = flight_data.FlightData(
-            price=flight_kiwi["price"],
-            departure_city=flight_kiwi["cityFrom"],
-            departure_airport=flight_kiwi["flyFrom"],
-            arrival_city=flight_kiwi["cityTo"],
-            arrival_airport=flight_kiwi["flyTo"],
-            departure_date=flight_kiwi["route"][0]["local_departure"].split("T")[0],
-            return_date=flight_kiwi["route"][1]["local_arrival"].split("T")[0],
-            airline=flight_kiwi["airlines"][0],
-            kiwi_link=flight_kiwi["deep_link"])
+            flight_data_kiwi = None
+        else:
+            flight_data_kiwi = flight_data.FlightData(
+                price=flight_kiwi["price"],
+                departure_city=flight_kiwi["cityFrom"],
+                departure_airport=flight_kiwi["flyFrom"],
+                arrival_city=flight_kiwi["cityTo"],
+                arrival_airport=flight_kiwi["flyTo"],
+                departure_date=flight_kiwi["route"][0]["local_departure"].split("T")[0],
+                return_date=flight_kiwi["route"][1]["local_arrival"].split("T")[0],
+                airline=flight_kiwi["airlines"][0],
+                kiwi_link=flight_kiwi["deep_link"])
 
         return flight_data_kiwi
