@@ -12,16 +12,11 @@ CSV_FILE = "cities_to_follow.csv"
 
 class DataManager:
 
-    def __init__(self, cities_list, prices_list):
+    def __init__(self):
         self.kiwi_iata_endpoint = KIWI_ENDPOINT + "/locations/query"
         self.kiwi_key = {"apikey": KIWI_KEY}
 
-        self.cities_to_csv = [city.title() for city in cities_list]
-        self.prices_to_csv = prices_list
-        self.iata_to_csv = []
-        for city in self.cities_to_csv:
-            self.iata_to_csv.append(self.get_iata(city_name=city))
-        self.create_csv()
+        self.write_iata_to_csv()
         self.city_file = pandas.read_csv(CSV_FILE, delimiter=",")
 
     def get_iata(self, city_name):
@@ -31,9 +26,10 @@ class DataManager:
         city_iata = kiwi_json["locations"][0]["code"]
         return city_iata
 
-    def create_csv(self):
-        cities_dict = {"city": self.cities_to_csv,
-                       "max_price": self.prices_to_csv,
-                       "iata": self.iata_to_csv}
-        cities_data_frame = pandas.DataFrame(cities_dict)
-        cities_data_frame.to_csv(CSV_FILE, index=False)
+    def write_iata_to_csv(self):
+        df_without_iata = pandas.read_csv(CSV_FILE, delimiter=",")
+        dict_iata = {"city": [c.title() for c in df_without_iata.city.tolist()],
+                     "max_price": df_without_iata.max_price.tolist(),
+                     "iata": [self.get_iata(c.title()) for c in df_without_iata.city]}
+        df_with_iata = pandas.DataFrame(dict_iata)
+        df_with_iata.to_csv(CSV_FILE, index=False)
