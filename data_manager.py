@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 
 load_dotenv("venv/.env")
 
-KIWI_ENDPOINT = os.getenv("KIWI_ENDPOINT")
+KIWI_LINK = os.getenv("KIWI_LINK")
 KIWI_KEY = os.getenv("KIWI_KEY")
 CSV_FILE = "cities_to_follow.csv"
 
@@ -13,7 +13,7 @@ CSV_FILE = "cities_to_follow.csv"
 class DataManager:
 
     def __init__(self):
-        self.kiwi_iata_endpoint = KIWI_ENDPOINT + "/locations/query"
+        self.kiwi_iata_endpoint = KIWI_LINK + "/locations/query"
         self.kiwi_key = {"apikey": KIWI_KEY}
 
         self.write_iata_to_csv()
